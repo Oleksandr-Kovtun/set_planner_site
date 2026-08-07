@@ -14,7 +14,18 @@
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
-  <base href="./">
+  <script>
+    (() => {
+      const repoName = window.location.pathname.split('/').filter(Boolean)[0];
+      const base = document.createElement('base');
+      if (window.location.hostname.endsWith('github.io') && repoName) {
+        base.href = `/${repoName}/`;
+      } else {
+        base.href = './';
+      }
+      document.head.insertBefore(base, document.head.firstChild);
+    })();
+  </script>
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
